@@ -1,8 +1,6 @@
 import {
   DefaultEventHandlers,
   Editor,
-  Resolver,
-  SerializedNodes,
   useEditor,
   UserComponent,
 } from "@craftjs/core";

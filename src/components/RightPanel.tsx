@@ -1,11 +1,4 @@
-import {
-  Flex,
-  FlexProps,
-  HTMLChakraProps,
-  StackProps,
-  Tabs,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, HTMLChakraProps, Tabs } from "@chakra-ui/react";
 import { Layers } from "@craftjs/layers";
 import { useEffect, useState } from "react";
 import MaterialIcon from "../util/MaterialIcon";

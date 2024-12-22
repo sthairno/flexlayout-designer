@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Frame, useEditor } from "@craftjs/core";
 import { Resizable } from "react-resizable";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { MinimumCanvasSize, NodeStyleClassNames } from "../config";
 
 import { canvasSizeAtom } from "./DesignerStateProvider";

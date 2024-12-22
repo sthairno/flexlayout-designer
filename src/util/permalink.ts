@@ -1,4 +1,4 @@
-import { decode, diagnose, encode } from "cbor2";
+import { decode, encode } from "cbor2";
 import { CanvasSize } from "../types/CanvasSize";
 import { SerializedTree } from "./serializer";
 import { StyleProperties } from "./styleProperties";

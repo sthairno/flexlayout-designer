@@ -1,11 +1,9 @@
 import {
-  Box,
   Button,
   Editable,
   Group,
   HStack,
   IconButton,
-  Span,
   StackProps,
   Text,
 } from "@chakra-ui/react";
@@ -13,7 +11,7 @@ import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "./ui/menu";
 import { Switch } from "./ui/switch";
 import { useEffect, useState } from "react";
 import ShareButton from "./ShareButton";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   autoSaveAvailableAtom,
   dirtyFlagAtom,

@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Heading, Span } from "@chakra-ui/react";
+import { Flex, FlexProps, Heading } from "@chakra-ui/react";
 import { ComponentTemplates } from "./ComponentTemplates";
 import MaterialIcon from "../util/MaterialIcon";
 

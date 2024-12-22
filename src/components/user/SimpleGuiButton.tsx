@@ -6,7 +6,7 @@ import {
   UserComponentInfo,
   UserComponentRelated,
 } from "./internal";
-import { Box, Button, Grid, Input, Span } from "@chakra-ui/react";
+import { Box, Grid, Input, Span } from "@chakra-ui/react";
 import { SimpleGuiOptions } from "../../util/siv3d";
 import { Field } from "../ui/field";
 

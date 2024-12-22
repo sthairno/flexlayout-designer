@@ -1,22 +1,9 @@
-import {
-  Box,
-  BoxProps,
-  HStack,
-  HTMLChakraProps,
-  Input,
-  InputProps,
-} from "@chakra-ui/react";
+import { Box, HTMLChakraProps, Input, InputProps } from "@chakra-ui/react";
 import { StyleProperties } from "../../util/styleProperties";
 import { parseLength } from "../../util/styleValue";
 import { Field } from "../ui/field";
 import { InputGroup } from "../ui/input-group";
-import { useCallback, useMemo } from "react";
-import {
-  SelectContent,
-  SelectLabel,
-  SelectRoot,
-  SelectTrigger,
-} from "../ui/select";
+import { useMemo } from "react";
 import { NativeSelectField, NativeSelectRoot } from "../ui/native-select";
 
 function LengthUnitSelector({

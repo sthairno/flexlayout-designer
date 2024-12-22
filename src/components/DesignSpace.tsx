@@ -1,19 +1,8 @@
-import {
-  Box,
-  BoxProps,
-  Button,
-  Group,
-  GroupProps,
-  Heading,
-  HeadingProps,
-  IconButton,
-} from "@chakra-ui/react";
-import { Node, useEditor, useNode } from "@craftjs/core";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Box, BoxProps } from "@chakra-ui/react";
+import { useEditor } from "@craftjs/core";
 import { ResizableCanvas } from "./ResizableCanvas";
 import { NodeBorderThickness, NodeStyleClassNames } from "../config";
-import { FlexLayoutBoxProps } from "./user/FlexLayoutBox";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   designSpaceElementAtom,
   outlineVisibleAtom,

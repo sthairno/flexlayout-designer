@@ -1,28 +1,17 @@
 import { ROOT_NODE, useEditor, useNode } from "@craftjs/core";
 import { Property } from "csstype";
-import React, {
-  forwardRef,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { NodeBorderThickness, NodeStyleClassNames } from "../config";
 import { designSpaceElementAtom } from "./DesignerStateProvider";
 import { FlexLayoutCommonProps } from "../types/FlexLayoutCommonProps";
 import {
   Box,
   Group,
-  GroupProps,
   Heading,
   HeadingProps,
   HStack,
   IconButton,
   IconButtonProps,
-  Separator,
-  Spacer,
   Span,
   StackProps,
 } from "@chakra-ui/react";

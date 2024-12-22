@@ -1,4 +1,4 @@
-import { Box, Flex, FlexProps, Heading, Icon } from "@chakra-ui/react";
+import { Box, Flex, FlexProps, Heading } from "@chakra-ui/react";
 import { forwardRef } from "react";
 
 interface BlockViewProps extends Omit<FlexProps, "children"> {

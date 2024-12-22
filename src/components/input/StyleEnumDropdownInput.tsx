@@ -1,6 +1,5 @@
 import { NativeSelectRootProps } from "@chakra-ui/react";
 import { StyleProperties } from "../../util/styleProperties";
-import { Field } from "../ui/field";
 import { NativeSelectField, NativeSelectRoot } from "../ui/native-select";
 
 export function StyleEnumDropdownInput({

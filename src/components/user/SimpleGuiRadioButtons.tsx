@@ -6,16 +6,7 @@ import {
   UserComponentInfo,
   UserComponentRelated,
 } from "./internal";
-import {
-  Box,
-  Button,
-  Circle,
-  Grid,
-  GridItem,
-  Input,
-  Span,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Circle, Grid, GridItem, Textarea } from "@chakra-ui/react";
 import { SimpleGuiOptions } from "../../util/siv3d";
 import { Field } from "../ui/field";
 import { Fragment } from "react/jsx-runtime";

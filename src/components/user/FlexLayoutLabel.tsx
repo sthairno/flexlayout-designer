@@ -1,6 +1,6 @@
 import { useNode, UserComponent } from "@craftjs/core";
-import { Box, Editable, Input, Textarea } from "@chakra-ui/react";
-import { Component, useEffect, useRef, useState } from "react";
+import { Box, Textarea } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   DefaultComponentViewProps,
