@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start server",
+            "type": "npm",
+            "script": "start",
+            "isBackground": true,
+            "options": {
+                "env": {
+                    "BROWSER": "none",
+                    "PORT": "3000",
+                    "REACT_EDITOR": "code"
+                }
+            },
+            "runOptions": {
+                "runOn": "folderOpen",
+                "instanceLimit": 1
+            }
+        }
+    ]
+}

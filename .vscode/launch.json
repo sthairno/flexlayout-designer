@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Launch Firefox",
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/src",
+            "pathMappings": [
+                {
+                    "url": "webpack:///src/*",
+                    "path": "${webRoot}/*"
+                }
+            ]
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMapPathOverrides": {
+                "webpack://src/*": "${webRoot}/*",
+            }
+        }
+    ]
+}
