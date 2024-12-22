@@ -74,26 +74,29 @@ export const useFlexLayoutFileAction = () => {
 
   return {
     exportProjectToFile: useAtomCallback(
-      useCallback(async (get, set) => {
-        const nodes = serialize();
+      useCallback(
+        async (get, set) => {
+          const nodes = serialize();
 
-        let fileName = get(projectNameAtom);
-        fileName.endsWith(".xml") || (fileName += ".xml");
+          let fileName = get(projectNameAtom);
+          fileName.endsWith(".xml") || (fileName += ".xml");
 
-        let fileHandle = get(fileHandleAtom);
+          let fileHandle = get(fileHandleAtom);
 
-        if (!fileHandle && IsAutoSaveSupported) {
-          fileHandle = await showSaveFileDialogAsync(fileName);
-          set(projectNameAtom, fileHandle?.name ?? "");
-          set(fileHandleAtom, fileHandle);
-        }
+          if (!fileHandle && IsAutoSaveSupported) {
+            fileHandle = await showSaveFileDialogAsync(fileName);
+            set(projectNameAtom, fileHandle?.name ?? "");
+            set(fileHandleAtom, fileHandle);
+          }
 
-        const tree = serializeCjsTree(nodes);
-        const xml = exportTreeToXml(tree);
-        await saveFileAsync(xml, fileName, fileHandle);
+          const tree = serializeCjsTree(nodes);
+          const xml = exportTreeToXml(tree);
+          await saveFileAsync(xml, fileName, fileHandle);
 
-        set(dirtyFlagAtom, false);
-      }, [])
+          set(dirtyFlagAtom, false);
+        },
+        [serialize]
+      )
     ),
     importProjectFromFile: useAtomCallback(
       useCallback(
@@ -115,7 +118,7 @@ export const useFlexLayoutFileAction = () => {
           set(fileHandleAtom, handle);
           set(dirtyFlagAtom, false);
         },
-        [resolver]
+        [deserialize, history, resolver]
       )
     ),
   };
@@ -131,40 +134,43 @@ export const usePermalinkAction = () => {
 
   return {
     createPermalinkAsync: useAtomCallback(
-      useCallback(async (get, set) => {
-        const nodes = serialize();
-        let projectName = get(projectNameAtom);
-        let canvasSize = get(canvasSizeAtom);
+      useCallback(
+        async (get, set) => {
+          const nodes = serialize();
+          let projectName = get(projectNameAtom);
+          let canvasSize = get(canvasSizeAtom);
 
-        const tree = serializeCjsTree(nodes);
-        const data = await encodePermalinkAsync({
-          projectName,
-          canvasSize,
-          tree,
-        });
+          const tree = serializeCjsTree(nodes);
+          const data = await encodePermalinkAsync({
+            projectName,
+            canvasSize,
+            tree,
+          });
 
-        // https://stackoverflow.com/questions/11471008/location-hash-and-back-history
-        let newUrl = window.location.href.split("#")[0];
-        newUrl += `#pj:${data}`;
-        window.location.replace(newUrl);
+          // https://stackoverflow.com/questions/11471008/location-hash-and-back-history
+          let newUrl = window.location.href.split("#")[0];
+          newUrl += `#pj:${data}`;
+          window.location.replace(newUrl);
 
-        let success = false;
-        if (navigator.clipboard) {
-          try {
-            await navigator.clipboard.writeText(newUrl);
-            success = true;
-          } catch (e) {
-            console.error(e);
+          let success = false;
+          if (navigator.clipboard) {
+            try {
+              await navigator.clipboard.writeText(newUrl);
+              success = true;
+            } catch (e) {
+              console.error(e);
+            }
           }
-        }
 
-        set(dirtyFlagAtom, false);
+          set(dirtyFlagAtom, false);
 
-        return {
-          url: newUrl,
-          clipboard: success,
-        };
-      }, [])
+          return {
+            url: newUrl,
+            clipboard: success,
+          };
+        },
+        [serialize]
+      )
     ),
   };
 };
@@ -205,32 +211,34 @@ function DesignerStateManager({ children }: { children: React.ReactNode }) {
     if (isDirty && isAutoSaveEnabled) {
       autoUpdateTaskId.current = setTimeout(exportProjectToFile, 1000);
     }
-  }, [isDirty, isAutoSaveEnabled]);
+  }, [isDirty, isAutoSaveEnabled, exportProjectToFile]);
 
   // 起動時にPeralinkを読み込む
   const initFlag = useRef(false);
   const loadPermalinkCallback = useAtomCallback(
-    useCallback(async (_get, set) => {
-      const hash = window.location.hash;
-      try {
-        if (hash.startsWith("#pj:")) {
-          const data = hash.substring(4);
-          const { projectName, canvasSize, tree } = await decodePermalinkAsync(
-            data
-          );
+    useCallback(
+      async (_get, set) => {
+        const hash = window.location.hash;
+        try {
+          if (hash.startsWith("#pj:")) {
+            const data = hash.substring(4);
+            const { projectName, canvasSize, tree } =
+              await decodePermalinkAsync(data);
 
-          const nodes = deserializeCjsTree(tree, resolver);
+            const nodes = deserializeCjsTree(tree, resolver);
 
-          deserialize(nodes);
-          history.clear();
-          set(projectNameAtom, projectName);
-          set(canvasSizeAtom, canvasSize);
-          set(dirtyFlagAtom, false);
+            deserialize(nodes);
+            history.clear();
+            set(projectNameAtom, projectName);
+            set(canvasSizeAtom, canvasSize);
+            set(dirtyFlagAtom, false);
+          }
+        } catch (e) {
+          console.error(e);
         }
-      } catch (e) {
-        console.error(e);
-      }
-    }, [])
+      },
+      [deserialize, history, resolver]
+    )
   );
   useEffect(() => {
     if (initFlag.current) {
@@ -240,7 +248,7 @@ function DesignerStateManager({ children }: { children: React.ReactNode }) {
     loadPermalinkCallback();
 
     initFlag.current = true;
-  }, [resolver]);
+  }, [loadPermalinkCallback]);
 
   return <>{children}</>;
 }

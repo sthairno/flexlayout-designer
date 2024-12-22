@@ -67,7 +67,7 @@ export default function StyleLengthInput({
     return length
       ? { value: length.value.toString(), unit: length.unit }
       : { value: String(data.defaultValue), unit: "" };
-  }, [property]);
+  }, [data.defaultValue]);
 
   // 入力値を内部ステートへ変換
   switch (typeof state) {

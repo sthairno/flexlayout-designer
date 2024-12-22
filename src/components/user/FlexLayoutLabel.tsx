@@ -52,7 +52,7 @@ export const FlexLayoutLabel: UserComponent<FlexLayoutTextProps> = ({
     if (!isEditable) {
       setEdit(false);
     }
-  }, [isSelected, isDragging]);
+  }, [isEditable]);
 
   return (
     <Box

@@ -64,7 +64,7 @@ function QuickEditToggleButton({
       : choices.indexOf(data.defaultValue);
     const nextValue = choices[(selectedIndex + 1) % choices.length];
     onToggle(nextValue);
-  }, [onToggle, value, property]);
+  }, [onToggle, value, data.choices, data.defaultValue]);
 
   return (
     <IconButtonWithTooltip
@@ -266,8 +266,7 @@ function SelectedNodeHeader(props: HeadingProps) {
 }
 
 function StickyItems() {
-  const { isHovered, isSelected, dom } = useNode((node) => ({
-    isHovered: node.events.hovered,
+  const { isSelected, dom } = useNode((node) => ({
     isSelected: node.events.selected,
     dom: node.dom,
   }));
@@ -275,10 +274,10 @@ function StickyItems() {
   const [canvasRect, setCanvasRect] = useState<DOMRect | null>(null);
   const [nodeRect, setNodeRect] = useState<DOMRect | null>(null);
 
-  const updateNodeRect = () => dom && setNodeRect(dom.getBoundingClientRect());
-
   // キャンバスのサイズ変更検知
   useEffect(() => {
+    const updateNodeRect = () =>
+      dom && setNodeRect(dom.getBoundingClientRect());
     const onScroll = () => dom && updateNodeRect();
     const updateCanvasRect = (el: Element) =>
       setCanvasRect(el.getBoundingClientRect());
@@ -298,7 +297,7 @@ function StickyItems() {
       observer.disconnect();
       canvasDom?.firstElementChild?.removeEventListener("scroll", onScroll);
     };
-  }, [canvasDom]);
+  }, [dom, canvasDom]);
 
   // 要素のサイズ変更検知
   useEffect(() => {

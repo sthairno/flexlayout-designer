@@ -61,7 +61,7 @@ export const SimpleGuiRadioButtons: UserComponent<
         lineHeight="normal"
       >
         {options.map((option, i) => {
-          const selected = i == 0;
+          const selected = i === 0;
           const color = selected
             ? SimpleGuiOptions.radioButtonFillColor
             : SimpleGuiOptions.radioButtonBaseColor;
