@@ -24,8 +24,8 @@ jobs:
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
-          cmd: install # will run `yarn install` command
+          cmd: install
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
-          cmd: build:prod # will run `yarn build:prod` command
+          cmd: build
